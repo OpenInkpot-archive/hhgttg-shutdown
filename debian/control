@@ -1,0 +1,25 @@
+Source: hhgttg-shutdown
+Section: gui
+Priority: optional
+Maintainer: Mikhail Gusarov <dottedmag@openinkpot.org>
+Build-Depends: debhelper (>= 7), mk-rawpic, lzma
+XCS-Cross-Host-Build-Depends: debhelper (>= 7), mk-rawpic, lzma
+Standards-Version: 3.8.0
+
+Package: hhgttg-shutdown-v3
+Architecture: all
+Depends: esplash-sysvinit
+Description: 'Don't panic!' shutdown splashscreen for Hanlin V3
+ "Don't panic!" shutdown" splash screen, based on Douglas Adams'
+ The Hitchhicker's Guide to the Galaxy" book.
+ .
+ This package contains splashscreen for Hanlin V3.
+
+Package: hhgttg-shutdown-n516
+Architecture: all
+Depends: esplash-sysvinit
+Description: 'Don't panic!' shutdown splashscreen for Hanvon N516
+ "Don't panic!" shutdown" splash screen, based on Douglas Adams'
+ The Hitchhicker's Guide to the Galaxy" book.
+ .
+ This package contains splashscreen for Hanvon N516.

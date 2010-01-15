@@ -1,0 +1,50 @@
+#!/usr/bin/make -f
+
+build-arch:
+build-indep:
+
+build: build-arch build-indep
+
+clean:
+	dh_testdir
+	dh_testroot
+	dh_clean
+
+DATADIR=/usr/share/esplash-data
+FIFODIR=/var/lib/esplash
+
+install: build-indep
+	dh_testdir
+	dh_testroot
+	dh_installdirs
+
+# Dirs
+	mkdir -p $(CURDIR)/debian/hhgttg-shutdown-v3$(DATADIR)
+	mkdir -p $(CURDIR)/debian/hhgttg-shutdown-n516$(DATADIR)
+
+# Pictures
+	mk-rawpic -r270 -d3 hhgttg.png $(CURDIR)/debian/hhgttg-shutdown-n516$(DATADIR)/hhgttg-shutdown
+	lzma $(CURDIR)/debian/hhgttg-shutdown-n516$(DATADIR)/hhgttg-shutdown
+
+	mk-rawpic -d2 hhgttg.png $(CURDIR)/debian/hhgttg-shutdown-v3$(DATADIR)/hhgttg-shutdown
+	lzma $(CURDIR)/debian/hhgttg-shutdown-v3$(DATADIR)/hhgttg-shutdown
+
+# Shutdown configs
+	install -T -m 0644 shutdown.cfg $(CURDIR)/debian/hhgttg-shutdown-v3$(DATADIR)/hhgttg-shutdown
+	install -T -m 0644 shutdown.cfg $(CURDIR)/debian/hhgttg-shutdown-n516$(DATADIR)/hhgttg-shutdown
+
+binary-arch:
+
+binary-indep: install
+	dh_testdir
+	dh_testroot
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_gencontrol
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install 
